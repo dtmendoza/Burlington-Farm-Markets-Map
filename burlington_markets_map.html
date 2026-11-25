@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1411761602c32e21c48e0335685eb043 {
+                    position: relative;
+                    width: 900.0px;
+                    min-width: 900.0px;
+                    height: 500.0px;
+                    min-height: 500.0px;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_1411761602c32e21c48e0335685eb043" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1411761602c32e21c48e0335685eb043 = L.map(
+                "map_1411761602c32e21c48e0335685eb043",
+                {
+                    center: [39.98869967104739, -74.78861436734624],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0f3fb7c1f496003527ff52f2a5f48186 = L.tileLayer(
+                "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?key=cb1_5ev9_1_0c5dfdfa4cb3e90b4ae052db",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0f3fb7c1f496003527ff52f2a5f48186.addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var marker_3ac07e3aff561c02af55cb2a35e4accd = L.marker(
+                [40.1460650117357, -74.7029532687327],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_9197d10ac5e98decc5996c9e63398d39 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aac7976f5c22ac8277d9bd29b4466e3d = L.popup({
+  "maxWidth": 1680,
+});
+
+        
+            
+                var html_095e8d463c6a14cb92ea8b8faa5b806d = $(`<div id="html_095e8d463c6a14cb92ea8b8faa5b806d" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Bordentown City Community Farmers’ Market<br><b>Address:</b> 207 Crosswicks Street (Carslake Community Center), Bordentown City<br><b>Market Type:</b> PP</div>`)[0];
+                popup_aac7976f5c22ac8277d9bd29b4466e3d.setContent(html_095e8d463c6a14cb92ea8b8faa5b806d);
+            
+        
+
+        marker_3ac07e3aff561c02af55cb2a35e4accd.bindPopup(popup_aac7976f5c22ac8277d9bd29b4466e3d)
+        ;
+
+        
+    
+    
+            marker_3ac07e3aff561c02af55cb2a35e4accd.bindTooltip(
+                `<div>
+                     Bordentown City Community Farmers’ Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_3ac07e3aff561c02af55cb2a35e4accd.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_3ac07e3aff561c02af55cb2a35e4accd.setIcon(icon_9197d10ac5e98decc5996c9e63398d39);
+            
+    
+            var marker_08cac6bd0be780b82540b97d5ee65cc4 = L.marker(
+                [39.966951549134, -74.9878036392598],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_0b61bf2d262b3d6941ee4e4372ccccca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8776f6c16aae3226648ebd142d4fc069 = L.popup({
+  "maxWidth": 1130,
+});
+
+        
+            
+                var html_a30127e06142feed72a2a70425e8daa1 = $(`<div id="html_a30127e06142feed72a2a70425e8daa1" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Browning-Hess Farm<br><b>Address:</b> 824 N. Lenola Road, Moorestown Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_8776f6c16aae3226648ebd142d4fc069.setContent(html_a30127e06142feed72a2a70425e8daa1);
+            
+        
+
+        marker_08cac6bd0be780b82540b97d5ee65cc4.bindPopup(popup_8776f6c16aae3226648ebd142d4fc069)
+        ;
+
+        
+    
+    
+            marker_08cac6bd0be780b82540b97d5ee65cc4.bindTooltip(
+                `<div>
+                     Browning-Hess Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_08cac6bd0be780b82540b97d5ee65cc4.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_08cac6bd0be780b82540b97d5ee65cc4.setIcon(icon_0b61bf2d262b3d6941ee4e4372ccccca);
+            
+    
+            var marker_227b3f23af1c09be2861b9a807eb065b = L.marker(
+                [39.9519922718008, -74.6854850247362],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_ab27f506dc55eb4f0bdb2adb5f604014 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f0faadd42cd93360253782d3c74fe44 = L.popup({
+  "maxWidth": 1200,
+});
+
+        
+            
+                var html_94801f18913db417e15d7e3914c75801 = $(`<div id="html_94801f18913db417e15d7e3914c75801" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Budds K-N-P Farms & Market<br><b>Address:</b> 131 Vincentown Road, Pemberton Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_9f0faadd42cd93360253782d3c74fe44.setContent(html_94801f18913db417e15d7e3914c75801);
+            
+        
+
+        marker_227b3f23af1c09be2861b9a807eb065b.bindPopup(popup_9f0faadd42cd93360253782d3c74fe44)
+        ;
+
+        
+    
+    
+            marker_227b3f23af1c09be2861b9a807eb065b.bindTooltip(
+                `<div>
+                     Budds K-N-P Farms & Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_227b3f23af1c09be2861b9a807eb065b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_227b3f23af1c09be2861b9a807eb065b.setIcon(icon_ab27f506dc55eb4f0bdb2adb5f604014);
+            
+    
+            var marker_0138a19a8e32462f26c3ebaa426b05b3 = L.marker(
+                [39.9851683790668, -74.8952135763607],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_1a3f33ab53069d1c3835b4db96c8edab = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_82759a42b301aec5322b01451f2c2c3c = L.popup({
+  "maxWidth": 1610,
+});
+
+        
+            
+                var html_5c5851ca72be9ab41a0a8ec508cae7d3 = $(`<div id="html_5c5851ca72be9ab41a0a8ec508cae7d3" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Burlington County Farmers Market<br><b>Address:</b> 500 Centerton Road (Near Centerton & Hartford Roads), Moorestown Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_82759a42b301aec5322b01451f2c2c3c.setContent(html_5c5851ca72be9ab41a0a8ec508cae7d3);
+            
+        
+
+        marker_0138a19a8e32462f26c3ebaa426b05b3.bindPopup(popup_82759a42b301aec5322b01451f2c2c3c)
+        ;
+
+        
+    
+    
+            marker_0138a19a8e32462f26c3ebaa426b05b3.bindTooltip(
+                `<div>
+                     Burlington County Farmers Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_0138a19a8e32462f26c3ebaa426b05b3.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_0138a19a8e32462f26c3ebaa426b05b3.setIcon(icon_1a3f33ab53069d1c3835b4db96c8edab);
+            
+    
+            var marker_e9920927087cbbf1056dcd36a9c738be = L.marker(
+                [40.0682256895824, -74.6007701612649],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_5a82edb240d2f5b246230dcf170acab9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_68598114cc6e606ca5d23af1f2826034 = L.popup({
+  "maxWidth": 1110,
+});
+
+        
+            
+                var html_ea48ebe628712d2d0b615f9e2e5a123e = $(`<div id="html_ea48ebe628712d2d0b615f9e2e5a123e" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Byrne Farm Market<br><b>Address:</b> 505 Monmouth Road, Wrightstown Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_68598114cc6e606ca5d23af1f2826034.setContent(html_ea48ebe628712d2d0b615f9e2e5a123e);
+            
+        
+
+        marker_e9920927087cbbf1056dcd36a9c738be.bindPopup(popup_68598114cc6e606ca5d23af1f2826034)
+        ;
+
+        
+    
+    
+            marker_e9920927087cbbf1056dcd36a9c738be.bindTooltip(
+                `<div>
+                     Byrne Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e9920927087cbbf1056dcd36a9c738be.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e9920927087cbbf1056dcd36a9c738be.setIcon(icon_5a82edb240d2f5b246230dcf170acab9);
+            
+    
+            var marker_2e67994539af6a410ced76e42346f887 = L.marker(
+                [40.1378910276793, -74.6578471061462],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_9ed3ba07b93758a930cb8c2c9fe4f95a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_238728331ccb9eaad87a55aedbc9ac61 = L.popup({
+  "maxWidth": 2050,
+});
+
+        
+            
+                var html_5f1acedccb3210e0ccfb9e3e8cabcb99 = $(`<div id="html_5f1acedccb3210e0ccfb9e3e8cabcb99" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Chesterfield Healthy Community Farmers’ Market<br><b>Address:</b> Saddle Way (Between Wright Drive & Thorn Lane At Chesterfield Elementary School), Chesterfield Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_238728331ccb9eaad87a55aedbc9ac61.setContent(html_5f1acedccb3210e0ccfb9e3e8cabcb99);
+            
+        
+
+        marker_2e67994539af6a410ced76e42346f887.bindPopup(popup_238728331ccb9eaad87a55aedbc9ac61)
+        ;
+
+        
+    
+    
+            marker_2e67994539af6a410ced76e42346f887.bindTooltip(
+                `<div>
+                     Chesterfield Healthy Community Farmers’ Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_2e67994539af6a410ced76e42346f887.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2e67994539af6a410ced76e42346f887.setIcon(icon_9ed3ba07b93758a930cb8c2c9fe4f95a);
+            
+    
+            var marker_4f3f24cf0e15e201cd56ebd704febfea = L.marker(
+                [39.9163393738414, -74.917287867018],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_4d910f0f236d666b76891771681c7dfd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7089b2355e05f0e7331e1eec6e4fa12e = L.popup({
+  "maxWidth": 1170,
+});
+
+        
+            
+                var html_90a38bc158028af42b931a1c6d39de66 = $(`<div id="html_90a38bc158028af42b931a1c6d39de66" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Cheyenne's Road Market<br><b>Address:</b> 4816 Church Road, Mount Laurel Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_7089b2355e05f0e7331e1eec6e4fa12e.setContent(html_90a38bc158028af42b931a1c6d39de66);
+            
+        
+
+        marker_4f3f24cf0e15e201cd56ebd704febfea.bindPopup(popup_7089b2355e05f0e7331e1eec6e4fa12e)
+        ;
+
+        
+    
+    
+            marker_4f3f24cf0e15e201cd56ebd704febfea.bindTooltip(
+                `<div>
+                     Cheyenne's Road Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4f3f24cf0e15e201cd56ebd704febfea.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4f3f24cf0e15e201cd56ebd704febfea.setIcon(icon_4d910f0f236d666b76891771681c7dfd);
+            
+    
+            var marker_d118d475f87592521cd9995e14f144a2 = L.marker(
+                [39.8388800823522, -74.7133170959038],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_a2a1afdadf7adc1effbcf4b48557ccd8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d791c8768f613698cc981b0bf07c40de = L.popup({
+  "maxWidth": 1010,
+});
+
+        
+            
+                var html_812391c08caa1add9b0a50bb765fcdaf = $(`<div id="html_812391c08caa1add9b0a50bb765fcdaf" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Conte Farm<br><b>Address:</b> 299 Flyatt Road, Tabernacle Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_d791c8768f613698cc981b0bf07c40de.setContent(html_812391c08caa1add9b0a50bb765fcdaf);
+            
+        
+
+        marker_d118d475f87592521cd9995e14f144a2.bindPopup(popup_d791c8768f613698cc981b0bf07c40de)
+        ;
+
+        
+    
+    
+            marker_d118d475f87592521cd9995e14f144a2.bindTooltip(
+                `<div>
+                     Conte Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d118d475f87592521cd9995e14f144a2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d118d475f87592521cd9995e14f144a2.setIcon(icon_a2a1afdadf7adc1effbcf4b48557ccd8);
+            
+    
+            var marker_d8d71573c413a22038f4993c60c4a189 = L.marker(
+                [39.8888889552925, -74.7408760269986],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_1365fbec55ec6e61b8faed7ea932fadf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b028415a20e4b3d7365623e90e1cde2b = L.popup({
+  "maxWidth": 1020,
+});
+
+        
+            
+                var html_48ef026285d75320dc6dc10b5c556a8b = $(`<div id="html_48ef026285d75320dc6dc10b5c556a8b" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Conte Farm<br><b>Address:</b> 1776 Route 206, Southampton Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_b028415a20e4b3d7365623e90e1cde2b.setContent(html_48ef026285d75320dc6dc10b5c556a8b);
+            
+        
+
+        marker_d8d71573c413a22038f4993c60c4a189.bindPopup(popup_b028415a20e4b3d7365623e90e1cde2b)
+        ;
+
+        
+    
+    
+            marker_d8d71573c413a22038f4993c60c4a189.bindTooltip(
+                `<div>
+                     Conte Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d8d71573c413a22038f4993c60c4a189.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d8d71573c413a22038f4993c60c4a189.setIcon(icon_1365fbec55ec6e61b8faed7ea932fadf);
+            
+    
+            var marker_70692a03b4b7a589028baf53e898f356 = L.marker(
+                [40.0551303436616, -74.7246778603052],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_034d6e093dcdbf0a76a51b1ea24166af = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_797ee1e9e8ed8eb42097fded35465857 = L.popup({
+  "maxWidth": 1130,
+});
+
+        
+            
+                var html_a823fa396fc4e12d0ca41650ac21c3f3 = $(`<div id="html_a823fa396fc4e12d0ca41650ac21c3f3" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Columbus Farmers Market<br><b>Address:</b> 2919 Route 206, Mansfield Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_797ee1e9e8ed8eb42097fded35465857.setContent(html_a823fa396fc4e12d0ca41650ac21c3f3);
+            
+        
+
+        marker_70692a03b4b7a589028baf53e898f356.bindPopup(popup_797ee1e9e8ed8eb42097fded35465857)
+        ;
+
+        
+    
+    
+            marker_70692a03b4b7a589028baf53e898f356.bindTooltip(
+                `<div>
+                     Columbus Farmers Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_70692a03b4b7a589028baf53e898f356.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_70692a03b4b7a589028baf53e898f356.setIcon(icon_034d6e093dcdbf0a76a51b1ea24166af);
+            
+    
+            var marker_6fcb58ccf81c220ba185169a9b221150 = L.marker(
+                [40.0058624395432, -74.91182805335],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_f8173b66fcad01449b14e72b2e882898 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_31b83b2f11df058f72c2f06a03c6eb92 = L.popup({
+  "maxWidth": 990,
+});
+
+        
+            
+                var html_0e6cdbf156b42a1d4b56416a8e46317f = $(`<div id="html_0e6cdbf156b42a1d4b56416a8e46317f" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Darmo Farms<br><b>Address:</b> 900 Cox Road, Moorestown Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_31b83b2f11df058f72c2f06a03c6eb92.setContent(html_0e6cdbf156b42a1d4b56416a8e46317f);
+            
+        
+
+        marker_6fcb58ccf81c220ba185169a9b221150.bindPopup(popup_31b83b2f11df058f72c2f06a03c6eb92)
+        ;
+
+        
+    
+    
+            marker_6fcb58ccf81c220ba185169a9b221150.bindTooltip(
+                `<div>
+                     Darmo Farms
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_6fcb58ccf81c220ba185169a9b221150.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_6fcb58ccf81c220ba185169a9b221150.setIcon(icon_f8173b66fcad01449b14e72b2e882898);
+            
+    
+            var marker_a5c75421fe68fe858aee66c955cb198e = L.marker(
+                [40.0205247339707, -74.9600302528181],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_d8e6977a2870b886b7ec70db8a42cc38 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5b04cfbcffbd894ed57b4461c6a62701 = L.popup({
+  "maxWidth": 1140,
+});
+
+        
+            
+                var html_c07fff57b49f754e113dcf8823728b38 = $(`<div id="html_c07fff57b49f754e113dcf8823728b38" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Delran's Farmers’ Market<br><b>Address:</b> 900 Chester Avenue, Delran Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_5b04cfbcffbd894ed57b4461c6a62701.setContent(html_c07fff57b49f754e113dcf8823728b38);
+            
+        
+
+        marker_a5c75421fe68fe858aee66c955cb198e.bindPopup(popup_5b04cfbcffbd894ed57b4461c6a62701)
+        ;
+
+        
+    
+    
+            marker_a5c75421fe68fe858aee66c955cb198e.bindTooltip(
+                `<div>
+                     Delran's Farmers’ Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a5c75421fe68fe858aee66c955cb198e.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a5c75421fe68fe858aee66c955cb198e.setIcon(icon_d8e6977a2870b886b7ec70db8a42cc38);
+            
+    
+            var marker_a77a1e64d8fa2e6cddc1237dc9f75bf0 = L.marker(
+                [39.8966723596842, -74.7800879722064],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_13c3ec10c4f5d6cf331405bdfb67a968 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_59dc2f142c9e035ff6732fb2468bb3b7 = L.popup({
+  "maxWidth": 1140,
+});
+
+        
+            
+                var html_6951d60ad0fde5fcf89806601774073f = $(`<div id="html_6951d60ad0fde5fcf89806601774073f" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Eckerts Corn Farm Market<br><b>Address:</b> 1643 Route 70, Southampton Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_59dc2f142c9e035ff6732fb2468bb3b7.setContent(html_6951d60ad0fde5fcf89806601774073f);
+            
+        
+
+        marker_a77a1e64d8fa2e6cddc1237dc9f75bf0.bindPopup(popup_59dc2f142c9e035ff6732fb2468bb3b7)
+        ;
+
+        
+    
+    
+            marker_a77a1e64d8fa2e6cddc1237dc9f75bf0.bindTooltip(
+                `<div>
+                     Eckerts Corn Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a77a1e64d8fa2e6cddc1237dc9f75bf0.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a77a1e64d8fa2e6cddc1237dc9f75bf0.setIcon(icon_13c3ec10c4f5d6cf331405bdfb67a968);
+            
+    
+            var marker_d5bdeb456662efafb6c2c35d85b0553b = L.marker(
+                [40.0994715455187, -74.6460960398814],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_6d0c9707808db1bbf53df0b3fe6c01bb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_41b79d1548087f85c4b14c0a59f42d96 = L.popup({
+  "maxWidth": 1220,
+});
+
+        
+            
+                var html_8ed7034f5f6acaa596867b141e0a2c01 = $(`<div id="html_8ed7034f5f6acaa596867b141e0a2c01" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Hlubik Farms<br><b>Address:</b> 92 Georgetown-Chesterfield Road, Chesterfield Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_41b79d1548087f85c4b14c0a59f42d96.setContent(html_8ed7034f5f6acaa596867b141e0a2c01);
+            
+        
+
+        marker_d5bdeb456662efafb6c2c35d85b0553b.bindPopup(popup_41b79d1548087f85c4b14c0a59f42d96)
+        ;
+
+        
+    
+    
+            marker_d5bdeb456662efafb6c2c35d85b0553b.bindTooltip(
+                `<div>
+                     Hlubik Farms
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d5bdeb456662efafb6c2c35d85b0553b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d5bdeb456662efafb6c2c35d85b0553b.setIcon(icon_6d0c9707808db1bbf53df0b3fe6c01bb);
+            
+    
+            var marker_4fa926965570b2bd0a18af83c0a80ff2 = L.marker(
+                [40.0114618019181, -74.9997098447345],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_8642bb2e9ba2826d68ef6e85596a9e36 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_89bd3486a08311eee0fc6bdc6de2e26e = L.popup({
+  "maxWidth": 1210,
+});
+
+        
+            
+                var html_70e814f073b59dca78815084a89b34df = $(`<div id="html_70e814f073b59dca78815084a89b34df" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Hunter’s Farm Market<br><b>Address:</b> 1101 Union Landing Road, Cinnaminson Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_89bd3486a08311eee0fc6bdc6de2e26e.setContent(html_70e814f073b59dca78815084a89b34df);
+            
+        
+
+        marker_4fa926965570b2bd0a18af83c0a80ff2.bindPopup(popup_89bd3486a08311eee0fc6bdc6de2e26e)
+        ;
+
+        
+    
+    
+            marker_4fa926965570b2bd0a18af83c0a80ff2.bindTooltip(
+                `<div>
+                     Hunter’s Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4fa926965570b2bd0a18af83c0a80ff2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4fa926965570b2bd0a18af83c0a80ff2.setIcon(icon_8642bb2e9ba2826d68ef6e85596a9e36);
+            
+    
+            var marker_0ecdcc22d9ec550687bf8baf8c391ab2 = L.marker(
+                [39.9195732496753, -74.851471114275],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_f47852bd32e8d1a0d6564d031bfa8632 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e60cc693f0298f88499f57b7b421e3c7 = L.popup({
+  "maxWidth": 1170,
+});
+
+        
+            
+                var html_8c459f5d7b1226afaabb75a4f3329d2d = $(`<div id="html_8c459f5d7b1226afaabb75a4f3329d2d" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Johnson’s Corner Farm Market<br><b>Address:</b> 133 Church Road, Medford Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_e60cc693f0298f88499f57b7b421e3c7.setContent(html_8c459f5d7b1226afaabb75a4f3329d2d);
+            
+        
+
+        marker_0ecdcc22d9ec550687bf8baf8c391ab2.bindPopup(popup_e60cc693f0298f88499f57b7b421e3c7)
+        ;
+
+        
+    
+    
+            marker_0ecdcc22d9ec550687bf8baf8c391ab2.bindTooltip(
+                `<div>
+                     Johnson’s Corner Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_0ecdcc22d9ec550687bf8baf8c391ab2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_0ecdcc22d9ec550687bf8baf8c391ab2.setIcon(icon_f47852bd32e8d1a0d6564d031bfa8632);
+            
+    
+            var marker_2212b772d82e5e0fb511bdc901f8529f = L.marker(
+                [40.0533693040815, -74.6614069304177],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_d29f30d96609ee0dd0039c76e947b013 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f1b4c4ddace3f2e936bef01317f93614 = L.popup({
+  "maxWidth": 1290,
+});
+
+        
+            
+                var html_52defde39e0efbcadfbf2876ffdba685 = $(`<div id="html_52defde39e0efbcadfbf2876ffdba685" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Johnson's Farm at Locust Hall<br><b>Address:</b> 2691 Monmouth Rd (537), Springfield Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_f1b4c4ddace3f2e936bef01317f93614.setContent(html_52defde39e0efbcadfbf2876ffdba685);
+            
+        
+
+        marker_2212b772d82e5e0fb511bdc901f8529f.bindPopup(popup_f1b4c4ddace3f2e936bef01317f93614)
+        ;
+
+        
+    
+    
+            marker_2212b772d82e5e0fb511bdc901f8529f.bindTooltip(
+                `<div>
+                     Johnson's Farm at Locust Hall
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_2212b772d82e5e0fb511bdc901f8529f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2212b772d82e5e0fb511bdc901f8529f.setIcon(icon_d29f30d96609ee0dd0039c76e947b013);
+            
+    
+            var marker_1dcba94e004dcc8f3c77039e7d1d17ec = L.marker(
+                [39.902627102502, -74.8233622466763],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_0d84922af1702ec739a863b0c9f844f1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f426deaf8ec73d4e409a28a623967b9f = L.popup({
+  "maxWidth": 1150,
+});
+
+        
+            
+                var html_eecbe1dd7fc17be22c78a30cac637822 = $(`<div id="html_eecbe1dd7fc17be22c78a30cac637822" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Kirby’s Farmers Market<br><b>Address:</b> 67 North Main Street, Medford Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_f426deaf8ec73d4e409a28a623967b9f.setContent(html_eecbe1dd7fc17be22c78a30cac637822);
+            
+        
+
+        marker_1dcba94e004dcc8f3c77039e7d1d17ec.bindPopup(popup_f426deaf8ec73d4e409a28a623967b9f)
+        ;
+
+        
+    
+    
+            marker_1dcba94e004dcc8f3c77039e7d1d17ec.bindTooltip(
+                `<div>
+                     Kirby’s Farmers Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_1dcba94e004dcc8f3c77039e7d1d17ec.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1dcba94e004dcc8f3c77039e7d1d17ec.setIcon(icon_0d84922af1702ec739a863b0c9f844f1);
+            
+    
+            var marker_af3c4d88511e367da2f1fdaa084a4f76 = L.marker(
+                [39.9709716381381, -74.993104641217],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_c684a094b77cfa4735520eb92f9fbbb4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_71e15a81edfe65ee9c09af515067fb76 = L.popup({
+  "maxWidth": 1130,
+});
+
+        
+            
+                var html_29ba32397d6ec5c01abd7d84fd27f5b1 = $(`<div id="html_29ba32397d6ec5c01abd7d84fd27f5b1" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Lew’s Farm Market<br><b>Address:</b> 864 N. Lenola Road, Cinnaminson Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_71e15a81edfe65ee9c09af515067fb76.setContent(html_29ba32397d6ec5c01abd7d84fd27f5b1);
+            
+        
+
+        marker_af3c4d88511e367da2f1fdaa084a4f76.bindPopup(popup_71e15a81edfe65ee9c09af515067fb76)
+        ;
+
+        
+    
+    
+            marker_af3c4d88511e367da2f1fdaa084a4f76.bindTooltip(
+                `<div>
+                     Lew’s Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_af3c4d88511e367da2f1fdaa084a4f76.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_af3c4d88511e367da2f1fdaa084a4f76.setIcon(icon_c684a094b77cfa4735520eb92f9fbbb4);
+            
+    
+            var marker_0ae09a8cfb6aa4f939a997728b38d80c = L.marker(
+                [39.9703999802742, -74.9690787870055],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_6bccf17f14ac71f8e6463f7af7511898 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_14a9714a4ece86fe76f88e18f1ee66e8 = L.popup({
+  "maxWidth": 1320,
+});
+
+        
+            
+                var html_a6974a5d890c3b551e47f8497bd0da18 = $(`<div id="html_a6974a5d890c3b551e47f8497bd0da18" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Lew’s Farm Market II<br><b>Address:</b> North Church St And New Albany Road, Moorestown Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_14a9714a4ece86fe76f88e18f1ee66e8.setContent(html_a6974a5d890c3b551e47f8497bd0da18);
+            
+        
+
+        marker_0ae09a8cfb6aa4f939a997728b38d80c.bindPopup(popup_14a9714a4ece86fe76f88e18f1ee66e8)
+        ;
+
+        
+    
+    
+            marker_0ae09a8cfb6aa4f939a997728b38d80c.bindTooltip(
+                `<div>
+                     Lew’s Farm Market II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_0ae09a8cfb6aa4f939a997728b38d80c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_0ae09a8cfb6aa4f939a997728b38d80c.setIcon(icon_6bccf17f14ac71f8e6463f7af7511898);
+            
+    
+            var marker_b484849e176e04f9ac1336a258f661fa = L.marker(
+                [39.9824378622926, -74.8049309416196],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_1cf9c964d4c946b08f0ae462ede54f91 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b545376c143770f84d9fe2b2ab33d16 = L.popup({
+  "maxWidth": 1100,
+});
+
+        
+            
+                var html_bc696383a312a228613540f560a1dbaa = $(`<div id="html_bc696383a312a228613540f560a1dbaa" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Lone Wolf Farm Market<br><b>Address:</b> 1537 Route 38, Lumberton Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_3b545376c143770f84d9fe2b2ab33d16.setContent(html_bc696383a312a228613540f560a1dbaa);
+            
+        
+
+        marker_b484849e176e04f9ac1336a258f661fa.bindPopup(popup_3b545376c143770f84d9fe2b2ab33d16)
+        ;
+
+        
+    
+    
+            marker_b484849e176e04f9ac1336a258f661fa.bindTooltip(
+                `<div>
+                     Lone Wolf Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_b484849e176e04f9ac1336a258f661fa.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_b484849e176e04f9ac1336a258f661fa.setIcon(icon_1cf9c964d4c946b08f0ae462ede54f91);
+            
+    
+            var marker_a48affdb21e6a6e7202da57c18c9a22e = L.marker(
+                [39.9879159034701, -74.6981127204445],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_0e00095d80b432739cda760766f6134a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4fb090da33c4747d9944799f24c2367a = L.popup({
+  "maxWidth": 1200,
+});
+
+        
+            
+                var html_cca6fc3303821450834469fe3fb4304b = $(`<div id="html_cca6fc3303821450834469fe3fb4304b" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Lone Wolf Farm Market II<br><b>Address:</b> 184 N. Pemberton Rd., Pemberton Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_4fb090da33c4747d9944799f24c2367a.setContent(html_cca6fc3303821450834469fe3fb4304b);
+            
+        
+
+        marker_a48affdb21e6a6e7202da57c18c9a22e.bindPopup(popup_4fb090da33c4747d9944799f24c2367a)
+        ;
+
+        
+    
+    
+            marker_a48affdb21e6a6e7202da57c18c9a22e.bindTooltip(
+                `<div>
+                     Lone Wolf Farm Market II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a48affdb21e6a6e7202da57c18c9a22e.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a48affdb21e6a6e7202da57c18c9a22e.setIcon(icon_0e00095d80b432739cda760766f6134a);
+            
+    
+            var marker_7af682240c36f5221f71a5e97ad1277a = L.marker(
+                [39.9370473793168, -74.7548562839052],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_fdf3a4bae0e92501ecfa3aa7ade4950c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52ca9d69329783d68f4f1c953682984a = L.popup({
+  "maxWidth": 1100,
+});
+
+        
+            
+                var html_09ed75f2f3d1a30148bb4def9cf14034 = $(`<div id="html_09ed75f2f3d1a30148bb4def9cf14034" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Paradise Hill Farm<br><b>Address:</b> 64 Mill Street, Southampton Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_52ca9d69329783d68f4f1c953682984a.setContent(html_09ed75f2f3d1a30148bb4def9cf14034);
+            
+        
+
+        marker_7af682240c36f5221f71a5e97ad1277a.bindPopup(popup_52ca9d69329783d68f4f1c953682984a)
+        ;
+
+        
+    
+    
+            marker_7af682240c36f5221f71a5e97ad1277a.bindTooltip(
+                `<div>
+                     Paradise Hill Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_7af682240c36f5221f71a5e97ad1277a.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_7af682240c36f5221f71a5e97ad1277a.setIcon(icon_fdf3a4bae0e92501ecfa3aa7ade4950c);
+            
+    
+            var marker_5b6666f8a3289d656df4be66db610e32 = L.marker(
+                [39.8419872670981, -74.7045986696654],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_54bbefc212b954ddb03e662b881d6c60 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_62e3d0eb05daf71c576f58d8ab9691aa = L.popup({
+  "maxWidth": 1230,
+});
+
+        
+            
+                var html_734bddb58e3808429e1f80a211e3a288 = $(`<div id="html_734bddb58e3808429e1f80a211e3a288" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Russo’s Fruit & Vegetable Farm<br><b>Address:</b> 186 Carranza Road, Tabernacle Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_62e3d0eb05daf71c576f58d8ab9691aa.setContent(html_734bddb58e3808429e1f80a211e3a288);
+            
+        
+
+        marker_5b6666f8a3289d656df4be66db610e32.bindPopup(popup_62e3d0eb05daf71c576f58d8ab9691aa)
+        ;
+
+        
+    
+    
+            marker_5b6666f8a3289d656df4be66db610e32.bindTooltip(
+                `<div>
+                     Russo’s Fruit & Vegetable Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5b6666f8a3289d656df4be66db610e32.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5b6666f8a3289d656df4be66db610e32.setIcon(icon_54bbefc212b954ddb03e662b881d6c60);
+            
+    
+            var marker_4ea17937881d41645a36efdb7814d62d = L.marker(
+                [40.1343275093154, -74.6011317706921],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_5fc3c648f98dbc1cf1f5a4c0a8cf7dd8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_acbea3207e28ef3783083e7070861c1e = L.popup({
+  "maxWidth": 1180,
+});
+
+        
+            
+                var html_d8d5ec05de9ea3a3b642c3a5eb1085a2 = $(`<div id="html_d8d5ec05de9ea3a3b642c3a5eb1085a2" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Russo’s Orchard Lane<br><b>Address:</b> 310 Extonville Road, Chesterfield Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_acbea3207e28ef3783083e7070861c1e.setContent(html_d8d5ec05de9ea3a3b642c3a5eb1085a2);
+            
+        
+
+        marker_4ea17937881d41645a36efdb7814d62d.bindPopup(popup_acbea3207e28ef3783083e7070861c1e)
+        ;
+
+        
+    
+    
+            marker_4ea17937881d41645a36efdb7814d62d.bindTooltip(
+                `<div>
+                     Russo’s Orchard Lane
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4ea17937881d41645a36efdb7814d62d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4ea17937881d41645a36efdb7814d62d.setIcon(icon_5fc3c648f98dbc1cf1f5a4c0a8cf7dd8);
+            
+    
+            var marker_3f29472963400ae9d71ea440699a4019 = L.marker(
+                [40.0366513838295, -74.7092414041449],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_c73fc0322507fff4dddc7f3d4118a3e4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_416b52683863487e68bf194b3619fe0e = L.popup({
+  "maxWidth": 1250,
+});
+
+        
+            
+                var html_33d39129e46fe3b0975e1a22624fe699 = $(`<div id="html_33d39129e46fe3b0975e1a22624fe699" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Scarborough Farm<br><b>Address:</b> 2112 Jacksonville-Jobstown Road, Springfield Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_416b52683863487e68bf194b3619fe0e.setContent(html_33d39129e46fe3b0975e1a22624fe699);
+            
+        
+
+        marker_3f29472963400ae9d71ea440699a4019.bindPopup(popup_416b52683863487e68bf194b3619fe0e)
+        ;
+
+        
+    
+    
+            marker_3f29472963400ae9d71ea440699a4019.bindTooltip(
+                `<div>
+                     Scarborough Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_3f29472963400ae9d71ea440699a4019.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_3f29472963400ae9d71ea440699a4019.setIcon(icon_c73fc0322507fff4dddc7f3d4118a3e4);
+            
+    
+            var marker_4c56444b04a7e907cfa44d29f3f62e70 = L.marker(
+                [40.0406148864512, -74.7675437739785],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_7d8037097a4f8c6932bdb77599a11ab2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a45a1ab9d65abfe15ae70bf78563de80 = L.popup({
+  "maxWidth": 1370,
+});
+
+        
+            
+                var html_ac403c9fb9e1b068d4e4f0508969909e = $(`<div id="html_ac403c9fb9e1b068d4e4f0508969909e" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Specca Farms Pick-Your-Own<br><b>Address:</b> 870 Jacksonville-Mount Holly Road, Eastampton City<br><b>Market Type:</b> PP</div>`)[0];
+                popup_a45a1ab9d65abfe15ae70bf78563de80.setContent(html_ac403c9fb9e1b068d4e4f0508969909e);
+            
+        
+
+        marker_4c56444b04a7e907cfa44d29f3f62e70.bindPopup(popup_a45a1ab9d65abfe15ae70bf78563de80)
+        ;
+
+        
+    
+    
+            marker_4c56444b04a7e907cfa44d29f3f62e70.bindTooltip(
+                `<div>
+                     Specca Farms Pick-Your-Own
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4c56444b04a7e907cfa44d29f3f62e70.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4c56444b04a7e907cfa44d29f3f62e70.setIcon(icon_7d8037097a4f8c6932bdb77599a11ab2);
+            
+    
+            var marker_653370237f61cc44c1aa781830aa9cf8 = L.marker(
+                [39.9701079191651, -74.6754979031009],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_ab73cbb61325c86387055e6e5c5d9dfd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f8a83c5bedf730017c513f47047c3ca5 = L.popup({
+  "maxWidth": 1110,
+});
+
+        
+            
+                var html_f46958e1e690dc2bd5cda379a06cd932 = $(`<div id="html_f46958e1e690dc2bd5cda379a06cd932" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Stellitano Farm<br><b>Address:</b> 75 Elizabeth Street, Pemberton Boro<br><b>Market Type:</b> PP</div>`)[0];
+                popup_f8a83c5bedf730017c513f47047c3ca5.setContent(html_f46958e1e690dc2bd5cda379a06cd932);
+            
+        
+
+        marker_653370237f61cc44c1aa781830aa9cf8.bindPopup(popup_f8a83c5bedf730017c513f47047c3ca5)
+        ;
+
+        
+    
+    
+            marker_653370237f61cc44c1aa781830aa9cf8.bindTooltip(
+                `<div>
+                     Stellitano Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_653370237f61cc44c1aa781830aa9cf8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_653370237f61cc44c1aa781830aa9cf8.setIcon(icon_ab73cbb61325c86387055e6e5c5d9dfd);
+            
+    
+            var marker_61e76421cfb677d69d99ecea9eb8c49d = L.marker(
+                [39.8029933131774, -74.756208410177],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_7592a1ff3251e81186d6af3f1644534b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3ea0768c8ccc0ab10f5d428cc5ec457 = L.popup({
+  "maxWidth": 1240,
+});
+
+        
+            
+                var html_168f3ca95f80bd0891ab28d8d3a82657 = $(`<div id="html_168f3ca95f80bd0891ab28d8d3a82657" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Sunshine Acres/Foulks Farm<br><b>Address:</b> 33 Old School House Road, Shamong Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_e3ea0768c8ccc0ab10f5d428cc5ec457.setContent(html_168f3ca95f80bd0891ab28d8d3a82657);
+            
+        
+
+        marker_61e76421cfb677d69d99ecea9eb8c49d.bindPopup(popup_e3ea0768c8ccc0ab10f5d428cc5ec457)
+        ;
+
+        
+    
+    
+            marker_61e76421cfb677d69d99ecea9eb8c49d.bindTooltip(
+                `<div>
+                     Sunshine Acres/Foulks Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_61e76421cfb677d69d99ecea9eb8c49d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_61e76421cfb677d69d99ecea9eb8c49d.setIcon(icon_7592a1ff3251e81186d6af3f1644534b);
+            
+    
+            var marker_b9b8327e7aefd79f8a7df232be4f089f = L.marker(
+                [40.0510291892464, -74.9218623810153],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_96664237277626a10f6c4f5d87fe0bbf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_11ff173e76e4b96bafbc5c850d2bb614 = L.popup({
+  "maxWidth": 1160,
+});
+
+        
+            
+                var html_a4688189b84c65c006cea45195f18784 = $(`<div id="html_a4688189b84c65c006cea45195f18784" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Varsaci Farm Market<br><b>Address:</b> 600 Green Street, Edgewater Park Twp<br><b>Market Type:</b> PP</div>`)[0];
+                popup_11ff173e76e4b96bafbc5c850d2bb614.setContent(html_a4688189b84c65c006cea45195f18784);
+            
+        
+
+        marker_b9b8327e7aefd79f8a7df232be4f089f.bindPopup(popup_11ff173e76e4b96bafbc5c850d2bb614)
+        ;
+
+        
+    
+    
+            marker_b9b8327e7aefd79f8a7df232be4f089f.bindTooltip(
+                `<div>
+                     Varsaci Farm Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_b9b8327e7aefd79f8a7df232be4f089f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_b9b8327e7aefd79f8a7df232be4f089f.setIcon(icon_96664237277626a10f6c4f5d87fe0bbf);
+            
+    
+            var marker_a7b4305231ac0deee086d9a1bf2ba4a2 = L.marker(
+                [39.9790900714838, -75.0084180282106],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_57505d700d7759afcb3841d773c3da85 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_edfd22bd371221971716597cf3ff7bef = L.popup({
+  "maxWidth": 1120,
+});
+
+        
+            
+                var html_389ce91f9bc6f70586e5876529213e56 = $(`<div id="html_389ce91f9bc6f70586e5876529213e56" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Winners Farm<br><b>Address:</b> 110 S. Forklanding Road, Cinnaminson Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_edfd22bd371221971716597cf3ff7bef.setContent(html_389ce91f9bc6f70586e5876529213e56);
+            
+        
+
+        marker_a7b4305231ac0deee086d9a1bf2ba4a2.bindPopup(popup_edfd22bd371221971716597cf3ff7bef)
+        ;
+
+        
+    
+    
+            marker_a7b4305231ac0deee086d9a1bf2ba4a2.bindTooltip(
+                `<div>
+                     Winners Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a7b4305231ac0deee086d9a1bf2ba4a2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a7b4305231ac0deee086d9a1bf2ba4a2.setIcon(icon_57505d700d7759afcb3841d773c3da85);
+            
+    
+            var marker_3440ff773a3c483dfdd8a97a7c52760d = L.marker(
+                [40.0677199492174, -74.6108499588173],
+                {
+}
+            ).addTo(map_1411761602c32e21c48e0335685eb043);
+        
+    
+            var icon_c46e054c2b66e33852b95d114d8fedf5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd251149317f3fd502b464b683170ab4 = L.popup({
+  "maxWidth": 1080,
+});
+
+        
+            
+                var html_a381381fe78bc2f59c26537e4e384fd0 = $(`<div id="html_a381381fe78bc2f59c26537e4e384fd0" style="width: 100.0%; height: 100.0%;"><b>Market:</b> Zach’s Produce<br><b>Address:</b> 625 Monmouth Road, Wrightstown Twp<br><b>Market Type:</b> A</div>`)[0];
+                popup_dd251149317f3fd502b464b683170ab4.setContent(html_a381381fe78bc2f59c26537e4e384fd0);
+            
+        
+
+        marker_3440ff773a3c483dfdd8a97a7c52760d.bindPopup(popup_dd251149317f3fd502b464b683170ab4)
+        ;
+
+        
+    
+    
+            marker_3440ff773a3c483dfdd8a97a7c52760d.bindTooltip(
+                `<div>
+                     Zach’s Produce
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_3440ff773a3c483dfdd8a97a7c52760d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_3440ff773a3c483dfdd8a97a7c52760d.setIcon(icon_c46e054c2b66e33852b95d114d8fedf5);
+            
+</script>
+</html>
